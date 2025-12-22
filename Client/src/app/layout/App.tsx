@@ -8,6 +8,7 @@ function App() {
 
   const [activities, SetActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     /* fetch('https://localhost:5001/api/activities')
@@ -28,17 +29,30 @@ function App() {
     setSelectedActivity(undefined);
   }
 
+  const handleOpenForm = (id?: string) => {
+    if (id) handledSelectedActivity(id)
+    else handleCanceledSelectedActivity();
+    setEditMode(true);
+  }
+
+  const handleFormClose = () => {
+    setEditMode(false);
+  } 
+
   return (
     <Box sx={{ bgcolor: '#eeee' }}>
       <CssBaseline />
-      <Navbar />
+      <Navbar openForm={handleOpenForm} />
       <Container maxWidth="xl" sx={{ mt: 3 }}>
-        <ActivityDashboard 
-          activities={activities} 
-          selectActivity={handledSelectedActivity} 
+        <ActivityDashboard
+          activities={activities}
+          selectActivity={handledSelectedActivity}
           cancelSelectActivity={handleCanceledSelectedActivity}
           selectedActivity={selectedActivity}
-          />
+          editMode={editMode}
+          openForm={handleOpenForm}
+          closeForm={handleFormClose} 
+        />
       </Container>
 
     </Box>

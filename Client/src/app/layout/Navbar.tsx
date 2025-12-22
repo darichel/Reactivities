@@ -9,7 +9,11 @@ import {
   Button,
 } from "@mui/material";
 
-export default function Navbar() {
+type Props = {
+  openForm : () => void
+}
+
+export default function Navbar({ openForm }: Props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -58,7 +62,7 @@ export default function Navbar() {
                 Contact
               </MenuItem>
             </Box>
-            <Button size="large" variant="contained" color="warning">
+            <Button size="large" variant="contained" color="warning" onClick={openForm}>
               Create Activity
             </Button>
           </Toolbar>
