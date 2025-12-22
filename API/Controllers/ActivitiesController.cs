@@ -8,9 +8,9 @@ namespace API.Controllers;
 public class ActivitiesController : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<List<Activity>>> GetActivities(CancellationToken ct)
+    public async Task<ActionResult<List<Activity>>> GetActivities()
     {
-        return await Mediator.Send(new GetActivityList.Query(), ct);
+        return await Mediator.Send(new GetActivityList.Query());
     }
 
     [HttpGet("{id}")]
@@ -26,7 +26,7 @@ public class ActivitiesController : BaseApiController
     }
 
     [HttpPut]
-    public async Task<ActionResult> UpdateActivity(Activity activity)
+    public async Task<ActionResult> EditActivity(Activity activity)
     { 
         await Mediator.Send(new EditActivity.Command { Activity = activity });
         return NoContent();
