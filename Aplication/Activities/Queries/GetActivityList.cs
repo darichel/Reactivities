@@ -1,4 +1,3 @@
-using System;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +13,7 @@ public class GetActivityList
     {
         public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return await context.Activities.ToListAsync(cancellationToken);
+           return await context.Activities.ToListAsync(cancellationToken);
         }
     }
 }
