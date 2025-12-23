@@ -12,7 +12,7 @@ type Props = {
   closeForm: () => void;
   editMode: boolean;
   // submitForm: (activity: Activity) => void;
-  deleteActivity: (id: string) => void;
+  //deleteActivity: (id: string) => void;
 };
 
 export default function ActivityDashboard({
@@ -24,7 +24,7 @@ export default function ActivityDashboard({
   closeForm,
   editMode,
   // submitForm,
-  deleteActivity,
+  //deleteActivity,
 }: Props) {
   return (
     <Grid container spacing={2}>
@@ -32,7 +32,7 @@ export default function ActivityDashboard({
         <ActivityList
           activities={activities}
           selectActivity={selectActivity}
-          deleteActivity={deleteActivity}
+          //deleteActivity={deleteActivity}
         />
       </Grid>
       <Grid size={5}>

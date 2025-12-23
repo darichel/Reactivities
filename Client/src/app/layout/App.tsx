@@ -50,13 +50,13 @@ function App() {
   //   setEditMode(false);
   // };
 
-  const handleDeleteActivity = (id: string) => {
-    // setActivities(activities.filter(a => a.id !== id));
-    // if (selectedActivity?.id === id) {
-    //   setSelectedActivity(undefined);
-    // }
-    console.log(id);
-  };
+  // const handleDeleteActivity = (id: string) => {
+  //   setActivities(activities.filter(a => a.id !== id));
+  //   if (selectedActivity?.id === id) {
+  //     setSelectedActivity(undefined);
+  //   }
+  //   console.log(id);
+  // };
 
   return (
     <Box sx={{ bgcolor: "#eeee", minHeight: "100vh" }}>
@@ -75,7 +75,7 @@ function App() {
             openForm={handleOpenForm}
             closeForm={handleFormClose}
             // submitForm={handleSubmitForm}
-            deleteActivity={handleDeleteActivity}
+            //deleteActivity={handleDeleteActivity}
           />
         )}
       </Container>
