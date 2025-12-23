@@ -6,16 +6,16 @@ import ActivityDashboard from '../../features/activities/dashboard/ActivityDashb
 
 function App() {
 
-  const [activities, SetActivities] = useState<Activity[]>([]);
+  const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     /* fetch('https://localhost:5001/api/activities')
       .then(response => response.json())
-      .then(data => SetActivities(data)); */
+      .then(data => setActivities(data)); */
     axios.get<Activity[]>('https://localhost:5001/api/activities')
-      .then(response => SetActivities(response.data));
+      .then(response => setActivities(response.data));
 
     return () => { }
   }, [])
@@ -39,6 +39,17 @@ function App() {
     setEditMode(false);
   } 
 
+  const handleSubmitForm = (activity: Activity) => {
+    if(activity.id) {
+      setActivities(activities.map(a => a.id === activity.id ? activity : a));
+    } else {
+      const newActivity = {...activity, id: activity.title};
+      setActivities([...activities, newActivity]);
+      setSelectedActivity(newActivity);
+    }
+    setEditMode(false)
+  }
+
   return (
     <Box sx={{ bgcolor: '#eeee' }}>
       <CssBaseline />
@@ -51,7 +62,8 @@ function App() {
           selectedActivity={selectedActivity}
           editMode={editMode}
           openForm={handleOpenForm}
-          closeForm={handleFormClose} 
+          closeForm={handleFormClose}
+          submitForm={handleSubmitForm}
         />
       </Container>
 

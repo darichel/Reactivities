@@ -4,18 +4,22 @@ import type { FormEvent } from "react";
 type Props = {
   closeForm: () => void;
   activity?: Activity;
+  submitForm: (activity: Activity) => void;
 }
 
-export default function ActivityForm({ closeForm, activity }: Props) {
+export default function ActivityForm({ closeForm, activity, submitForm }: Props) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const formData  = new FormData(event.currentTarget);
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
 
-    const data: {[key: string]: FormDataEntryValue} = {}
+    const data: { [key: string]: FormDataEntryValue } = {}
     formData.forEach((value, key) => {
       data[key] = value;
-    })
-    console.log(data)
+    });
+
+    if (activity) data.id = activity.id;
+
+    submitForm(data as unknown as Activity);
   }
   return (
     <Paper sx={{ borderRadius: 3, padding: 3 }}>
