@@ -1,31 +1,23 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material'
 import { useState } from 'react'
-import axios from 'axios';
 import Navbar from './Navbar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
-import { useQuery } from '@tanstack/react-query';
+import { useActivities } from '../../lib/hooks/useActivities';
 
 function App() {
 
   // const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
   const [editMode, setEditMode] = useState(false);
+  //use custom hooks
+  const { activities, isPending } = useActivities();
 
   // useEffect(() => {
   //   axios.get<Activity[]>('https://localhost:5001/api/activities')
   //     .then(response => setActivities(response.data));
   //   return () => { }
   // }, []);
-
-  //Now use tanstack query librari
-  const { data: activities, isPending } = useQuery({
-    queryKey: ['activities'],
-    queryFn: async () => {
-      const response = await axios.get<Activity[]>('https://localhost:5001/api/activities');
-      return response.data;
-    }
-  })
-
+  
   const handledSelectedActivity = (id: string) => {
     const activity = activities!.find(a => a.id === id);
     setSelectedActivity(activity);
