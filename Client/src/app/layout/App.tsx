@@ -38,17 +38,17 @@ function App() {
     setEditMode(false);
   };
 
-  const handleSubmitForm = (activity: Activity) => {
-    // if (activity.id) {
-    //   setActivities(activities.map(a => a.id === activity.id ? activity : a));
-    // } else {
-    //   const newActivity = { ...activity, id: activity.title };
-    //   setActivities([...activities, newActivity]);
-    //   setSelectedActivity(newActivity);
-    // }
-    console.log(activity);
-    setEditMode(false);
-  };
+  // const handleSubmitForm = (activity: Activity) => {
+  //   if (activity.id) {
+  //     setActivities(activities.map(a => a.id === activity.id ? activity : a));
+  //   } else {
+  //     const newActivity = { ...activity, id: activity.title };
+  //     setActivities([...activities, newActivity]);
+  //     setSelectedActivity(newActivity);
+  //   }
+  //   console.log(activity);
+  //   setEditMode(false);
+  // };
 
   const handleDeleteActivity = (id: string) => {
     // setActivities(activities.filter(a => a.id !== id));
@@ -74,7 +74,7 @@ function App() {
             editMode={editMode}
             openForm={handleOpenForm}
             closeForm={handleFormClose}
-            submitForm={handleSubmitForm}
+            // submitForm={handleSubmitForm}
             deleteActivity={handleDeleteActivity}
           />
         )}
