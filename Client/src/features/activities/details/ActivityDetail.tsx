@@ -25,7 +25,7 @@ export default function ActivityDetail() {
       <CardContent>
         <Typography variant="h5">{activity.title}</Typography>
         <Typography variant="subtitle1" fontWeight="light">
-          {new Date(activity.date).toLocaleDateString()}
+          {new Date(activity.date).toISOString().split("T")[0]}
         </Typography>
         <Typography variant="body1">{activity.description}</Typography>
       </CardContent>
@@ -33,7 +33,7 @@ export default function ActivityDetail() {
         <Button
           color="primary"
           component={Link}
-          to={`/activities/${activity.id}`}
+          to={`/manage/${activity.id}`}
         >
           Edit
         </Button>
