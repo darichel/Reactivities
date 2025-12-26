@@ -8,6 +8,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { NavLink } from "react-router";
+import MenuItemLink from "../shared/components/MenuItemLink";
 
 export default function Navbar() {
   return (
@@ -22,7 +23,11 @@ export default function Navbar() {
         <Container maxWidth="xl">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>
-              <MenuItem component={NavLink} to="/" sx={{ display: "flex", gap: 2 }}>
+              <MenuItem
+                component={NavLink}
+                to="/"
+                sx={{ display: "flex", gap: 2 }}
+              >
                 <Group fontSize="large" />
                 <Typography variant="h4" fontWeight="bold">
                   Reactivities
@@ -30,29 +35,8 @@ export default function Navbar() {
               </MenuItem>
             </Box>
             <Box sx={{ display: "flex" }}>
-              <MenuItem
-                component={NavLink}
-                to="/activities"
-                sx={{
-                  fontSize: "1.2rem",
-                  textTransform: "uppercase",
-                  fontWeight: "bold",
-                }}
-              >
-                Activities
-              </MenuItem>
-
-              <MenuItem
-                component={NavLink}
-                to="/create-activity"
-                sx={{
-                  fontSize: "1.2rem",
-                  textTransform: "uppercase",
-                  fontWeight: "bold",
-                }}
-              >
-                Create Activity
-              </MenuItem>
+              <MenuItemLink to="/activities">Activities</MenuItemLink>
+              <MenuItemLink to="/create-activity">Create Activity</MenuItemLink>
             </Box>
             <MenuItem>User menu</MenuItem>
           </Toolbar>

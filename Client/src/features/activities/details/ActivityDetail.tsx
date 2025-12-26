@@ -1,32 +1,43 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
-import { useActivities } from "../../../lib/hooks/useActivities";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import { Link, useNavigate } from "react-router";
 
-type Props = {
-    selectedActivity: Activity
-    cancelSelectActivity : () => void;
-    openForm: (id?: string) => void;
-}
+export default function ActivityDetail() {
+  const navigate = useNavigate();
+  const activity = {} as Activity;
 
-export default function ActivityDetail({ selectedActivity, cancelSelectActivity, openForm  }: Props) {
-    const {activities} = useActivities();
-    const activity = activities?.find(a => a.id === selectedActivity.id);
-
-    if(!activity) return <Typography>Loading...</Typography>;
-    return (
-        <Card sx={{ borderRadius: 3 }}>
-            <CardMedia
-                component='img'
-                src={`/images/categoryImages/${activity.category}.jpg`}
-            />
-            <CardContent>
-                <Typography variant="h5">{activity.title}</Typography>
-                <Typography variant="subtitle1" fontWeight='light'>{activity.date.toString()}</Typography>
-                <Typography variant="body1">{activity.description}</Typography>
-            </CardContent>
-            <CardActions>
-                <Button color='primary' onClick={() => openForm(activity.id)}>Edit</Button>
-                <Button color='inherit' onClick={cancelSelectActivity}>Cancel</Button>
-            </CardActions>
-        </Card>
-    )
+  if (!activity) return <Typography>Loading...</Typography>;
+  return (
+    <Card sx={{ borderRadius: 3 }}>
+      <CardMedia
+        component="img"
+        src={`/images/categoryImages/${activity.category}.jpg`}
+      />
+      <CardContent>
+        <Typography variant="h5">{activity.title}</Typography>
+        <Typography variant="subtitle1" fontWeight="light">
+          {new Date(activity.date).toLocaleDateString()}
+        </Typography>
+        <Typography variant="body1">{activity.description}</Typography>
+      </CardContent>
+      <CardActions>
+        <Button
+          color="primary"
+          component={Link}
+          to={`/activities/${activity.id}`}
+        >
+          Edit
+        </Button>
+        <Button color="inherit" onClick={() => navigate('/activities')}>
+          Cancel
+        </Button>
+      </CardActions>
+    </Card>
+  );
 }
