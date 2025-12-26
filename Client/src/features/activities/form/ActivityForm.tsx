@@ -2,18 +2,10 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import type { FormEvent } from "react";
 import { useActivities } from "../../../lib/hooks/useActivities";
 
-type Props = {
-  closeForm: () => void;
-  activity?: Activity;
-  //submitForm: (activity: Activity) => void;
-};
 
-export default function ActivityForm({
-  closeForm,
-  activity,
-}: //submitForm,
-Props) {
+export default function ActivityForm() {
   const { updateActivity, createdActivity } = useActivities();
+  const activity = {} as Activity
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,10 +19,8 @@ Props) {
     if (activity) {
       data.id = activity.id;
       await updateActivity.mutateAsync(data as unknown as Activity);
-      closeForm();
     } else {
       await createdActivity.mutateAsync(data as unknown as Activity);
-      closeForm();
     }
 
     //submitForm(data as unknown as Activity);
@@ -72,7 +62,7 @@ Props) {
         <TextField name="city" label="City" defaultValue={activity?.city} />
         <TextField name="venue" label="Venue" defaultValue={activity?.venue} />
         <Box display="flex" justifyContent="end" gap={2}>
-          <Button color="inherit" variant="outlined" onClick={closeForm}>
+          <Button color="inherit" variant="outlined" >
             Cancel
           </Button>
           <Button color="success" variant="contained" type="submit" disabled={updateActivity.isPending || createdActivity.isPending}>
