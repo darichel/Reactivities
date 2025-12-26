@@ -5,19 +5,14 @@ import ActivityDashboard from "../../features/activities/dashboard/ActivityDashb
 import { useActivities } from "../../lib/hooks/useActivities";
 
 function App() {
-  // const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<
     Activity | undefined
   >(undefined);
   const [editMode, setEditMode] = useState(false);
-  //use custom hooks
+
   const { activities, isPending } = useActivities();
 
-  // useEffect(() => {
-  //   axios.get<Activity[]>('https://localhost:5001/api/activities')
-  //     .then(response => setActivities(response.data));
-  //   return () => { }
-  // }, []);
+
 
   const handledSelectedActivity = (id: string) => {
     const activity = activities!.find((a) => a.id === id);
@@ -38,26 +33,6 @@ function App() {
     setEditMode(false);
   };
 
-  // const handleSubmitForm = (activity: Activity) => {
-  //   if (activity.id) {
-  //     setActivities(activities.map(a => a.id === activity.id ? activity : a));
-  //   } else {
-  //     const newActivity = { ...activity, id: activity.title };
-  //     setActivities([...activities, newActivity]);
-  //     setSelectedActivity(newActivity);
-  //   }
-  //   console.log(activity);
-  //   setEditMode(false);
-  // };
-
-  // const handleDeleteActivity = (id: string) => {
-  //   setActivities(activities.filter(a => a.id !== id));
-  //   if (selectedActivity?.id === id) {
-  //     setSelectedActivity(undefined);
-  //   }
-  //   console.log(id);
-  // };
-
   return (
     <Box sx={{ bgcolor: "#eeee", minHeight: "100vh" }}>
       <CssBaseline />
@@ -74,8 +49,6 @@ function App() {
             editMode={editMode}
             openForm={handleOpenForm}
             closeForm={handleFormClose}
-            // submitForm={handleSubmitForm}
-            //deleteActivity={handleDeleteActivity}
           />
         )}
       </Container>
