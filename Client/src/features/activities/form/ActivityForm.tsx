@@ -1,5 +1,5 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import type { FormEvent } from "react";
+import { type FormEvent } from "react";
 import { useActivities } from "../../../lib/hooks/useActivities";
 import { useNavigate, useParams } from "react-router";
 
@@ -34,7 +34,7 @@ export default function ActivityForm() {
   return (
     <Paper sx={{ borderRadius: 3, padding: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">
-        Create Activity
+        {activity ? "Edit Activity" : "Create Activity"}
       </Typography>
       <Box
         component="form"
@@ -68,7 +68,7 @@ export default function ActivityForm() {
         <TextField name="city" label="City" defaultValue={activity?.city} />
         <TextField name="venue" label="Venue" defaultValue={activity?.venue} />
         <Box display="flex" justifyContent="end" gap={2}>
-          <Button color="inherit" variant="outlined" >
+          <Button color="inherit" variant="outlined" onClick={() => navigate(`/activities/${activity?.id}`)}>
             Cancel
           </Button>
           <Button color="success" variant="contained" type="submit" disabled={updateActivity.isPending || createdActivity.isPending}>
