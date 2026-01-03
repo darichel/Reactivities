@@ -1,3 +1,4 @@
+using API.Middleware;
 using Aplication.Activities.Queries;
 using Aplication.Activities.Validators;
 using Aplication.Core;
@@ -22,10 +23,12 @@ builder.Services.AddMediatR(x =>
 });
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
+builder.Services.AddTransient<ExceptionMiddleware>();
 
 var app =  builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(option => option.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000", "https://localhost:3000"));
 app.MapControllers();
 

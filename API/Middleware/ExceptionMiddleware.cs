@@ -20,9 +20,9 @@ public class ExceptionMiddleware : IMiddleware
             Console.WriteLine(e);
             throw;
         }
-    }
+    } 
 
-    private async Task HandleValidationException(HttpContext context, ValidationException ex)
+    private static async Task HandleValidationException(HttpContext context, ValidationException ex)
     {
         var validationErrors = new Dictionary<string, string[]>();
 
@@ -48,7 +48,7 @@ public class ExceptionMiddleware : IMiddleware
             Status = StatusCodes.Status400BadRequest,
             Type = "ValidationFailure",
             Title = "Validation Error",
-            Detail = "One or more validation errors occurred"
+            Detail = "One or more validation errors has occurred"
         };
         
         await context.Response.WriteAsJsonAsync(validationProblemsDetails);
