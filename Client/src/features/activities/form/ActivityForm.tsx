@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import TextInput from "../../../app/shared/components/TextInput";
 import SelectInput from "../../../app/shared/components/SelectInput";
 import { categoryOptions } from "./categoryOption";
+import DateTimeInput from "../../../app/shared/components/DateTimeInput";
 
 export default function ActivityForm() {
   const {
@@ -28,7 +29,7 @@ export default function ActivityForm() {
     if (activity) {
       reset({
         ...activity,
-        date: new Date(activity.date).toISOString().split("T")[0],
+        date: new Date(activity.date),
       });
     }
   }, [activity, reset]);
@@ -54,7 +55,7 @@ export default function ActivityForm() {
         <TextInput label='Title' control={control} name='title' />
         <TextInput label='Description' control={control} name='description' />
         <SelectInput items={categoryOptions} label='Category' control={control} name='category' />
-        <TextInput label='Date' control={control} name='date' />
+        <DateTimeInput label='Date' control={control} name='date' />
         <TextInput label='City' control={control} name='city' />
         <TextInput label='Venue' control={control} name='venue' />
 
