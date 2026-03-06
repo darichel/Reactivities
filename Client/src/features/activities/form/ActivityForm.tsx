@@ -12,6 +12,7 @@ import TextInput from "../../../app/shared/components/TextInput";
 import SelectInput from "../../../app/shared/components/SelectInput";
 import { categoryOptions } from "./categoryOption";
 import DateTimeInput from "../../../app/shared/components/DateTimeInput";
+import LocationInput from "../../../app/shared/components/LocationInput";
 
 export default function ActivityForm() {
   const {
@@ -56,14 +57,13 @@ export default function ActivityForm() {
         <TextInput label='Description' control={control} name='description' />
         <SelectInput items={categoryOptions} label='Category' control={control} name='category' />
         <DateTimeInput label='Date' control={control} name='date' />
-        <TextInput label='City' control={control} name='city' />
-        <TextInput label='Venue' control={control} name='venue' />
+        <LocationInput control={control} name='location' label='Enter the location' />
 
         <Box display="flex" justifyContent="end" gap={2}>
           <Button
             color="inherit"
             variant="outlined"
-            /* onClick={() => navigate(`/activities/${activity?.id}`)} */
+            onClick={() => reset()}
           >
             Cancel
           </Button>
