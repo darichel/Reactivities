@@ -11,7 +11,7 @@ type Activity = {
     longitude:   number;
 }
 
-export type LocationIQSuggesstion = {
+export type LocationIQSuggestion = {
     place_id:        string;
     osm_id:          string;
     osm_type:        string;
@@ -32,7 +32,9 @@ export type LocationIQAddress = {
     road?:          string;
     neighbourhood?: string;
     suburb?:        string;
-    city:           string;
+    town?:          string;
+    village?:       string
+    city?:          string;
     state:          string;
     postcode?:      string;
     country:        string;

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agent";
 import { useLocation } from "react-router";
+import type { Activity } from "../types";
 
 export const useActivities = (id?: string) => {
   const queryClient = useQueryClient();
@@ -15,7 +16,7 @@ export const useActivities = (id?: string) => {
     enabled: !id && location.pathname === "/activities"
   });
 
-  const { data: activity, isLoading: isActivityLoading } = useQuery({
+  const { data: activity, isLoading: isLoadingActivity } = useQuery({
     queryKey: ["activity", id],
     queryFn: async () => {
       const response = await agent.get<Activity>(`/activities/${id}`);
@@ -33,7 +34,7 @@ export const useActivities = (id?: string) => {
     },
   });
 
-  const createdActivity = useMutation({
+  const createActivity = useMutation({
     mutationFn: async (activity: Activity) => {
       const response =await agent.post("/activities", activity);
       return response.data;
@@ -43,7 +44,7 @@ export const useActivities = (id?: string) => {
     },
   });
 
-  const deletedActivity = useMutation({
+  const deleteActivity = useMutation({
     mutationFn: async (id: string) => {
       await agent.delete(`/activities/${id}`);
     },
@@ -56,9 +57,9 @@ export const useActivities = (id?: string) => {
     activities,
     isPending,
     updateActivity,
-    createdActivity,
-    deletedActivity,
+    createActivity,
+    deleteActivity,
     activity,
-    isActivityLoading,
+    isLoadingActivity,
   };
 };
