@@ -13,7 +13,7 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
     const [loading, setLoading] = useState(false);
     const [suggestions, setSuggestions] = useState<LocationIQSuggestion[]>([]);
     const [inputValue, setInputValue] = useState(field.value || '');
-
+    
     useEffect(() => {
         if (field.value && typeof field.value === 'object') {
             setInputValue(field.value.venue || '');
@@ -21,9 +21,8 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
             setInputValue(field.value || '');
         }
     }, [field.value]);
-
+    
     const locationUrl = 'https://api.locationiq.com/v1/autocomplete?key=pk.8d6e8cc0aa50d3baa9fa6ec64727ef50&limit=5&dedupe=1&';
-
 
     const fetchSuggestions = useMemo(
         () => debounce(async (query: string) => {

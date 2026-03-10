@@ -10,6 +10,7 @@ import SelectInput from "../../../app/shared/components/SelectInput";
 import { categoryOptions } from "./categoryOptions";
 import DateTimeInput from "../../../app/shared/components/DateTimeInput";
 import LocationInput from "../../../app/shared/components/LocationInput";
+import type { Activity } from "../../../lib/types";
 
 export default function ActivityForm() {
     const { control, reset, handleSubmit } = useForm<ActivitySchema>({
@@ -35,7 +36,23 @@ export default function ActivityForm() {
     }, [activity, reset]);
 
     const onSubmit = async (data: ActivitySchema) => {
-      console.log(data);
+        const { location, ...rest } = data;
+        const flattenedData = { ...rest, ...location };
+        try {
+            if (activity) {
+                updateActivity.mutate({ ...activity, ...flattenedData } as Activity, {
+                    onSuccess: () => navigate(`/activities/${activity.id}`)
+                });
+            } else {
+                createActivity.mutate(flattenedData as Activity, {
+                    onSuccess: (id) => {
+                        navigate(`/activities/${id}`);
+                    }
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     if (isLoadingActivity) return <Typography>Loading activity...</Typography>;

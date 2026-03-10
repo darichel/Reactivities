@@ -1,10 +1,10 @@
 type Activity = {
-    id:          string;
+    id?:          string;
     title:       string;
     description: string;
     date:        Date;
     category:    string;
-    isCancelled: boolean;
+    isCancelled?: boolean;
     city:        string;
     venue:       string;
     latitude:    number;
