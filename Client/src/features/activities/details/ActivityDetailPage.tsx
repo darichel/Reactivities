@@ -12,9 +12,9 @@ import ActivityDetailHeader from "./ActivityDetailHeader";
 export default function ActivityDetailPage() {
   //const navigate = useNavigate();
   const {id} = useParams();
-  const {activity, isActivityLoading} = useActivities(id);
+  const {activity, isLoadingActivity} = useActivities(id);
  
-  if (isActivityLoading) return <Typography>Loading...</Typography>;
+  if (isLoadingActivity) return <Typography>Loading...</Typography>;
   if (!activity) return <Typography>Activity not found</Typography>;
   return (
     // <Card sx={{ borderRadius: 3 }}>
