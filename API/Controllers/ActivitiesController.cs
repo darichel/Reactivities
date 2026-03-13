@@ -2,7 +2,6 @@ using Aplication.Activities.Commands;
 using Aplication.Activities.DTOs;
 using Aplication.Activities.Queries;
 using Domain;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

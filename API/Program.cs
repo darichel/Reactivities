@@ -40,13 +40,25 @@ builder.Services.AddIdentityApiEndpoints<User>(opt =>
 .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<AppDbContext>();
 
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.Cookie.SameSite = SameSiteMode.None;
+    opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+});
+
 var app =  builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseCors(option => option.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000", "https://localhost:3000"));
+app.UseCors(x => x
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("http://localhost:3000", "https://localhost:3000"));
+
 app.UseAuthentication();
 app.UseAuthorization();
+ 
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<User>(); //api/login
 
