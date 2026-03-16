@@ -1,31 +1,25 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Paper, Typography } from "@mui/material";
-import { loginSchema, type LoginSchema } from "../../lib/schemas/loginSchema";
 import { useAccount } from "../../lib/hooks/useAccount";
 import { LockOpen } from "@mui/icons-material";
 import TextInput from "../../app/shared/components/TextInput";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link } from "react-router";
+import { registerSchema, type RegisterSchema } from "../../lib/schemas/registerSchema";
 
-export default function LoginForm() {
-  const { loginUser } = useAccount();
-  const navigate = useNavigate();
-  const location = useLocation();
+export default function RegisterForm() {
+  const { registerUser } = useAccount();
   const {
     control,
     handleSubmit,
     formState: { isValid, isLoading },
-  } = useForm<LoginSchema>({
+  } = useForm<RegisterSchema>({
     mode: "onTouched",
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = async (data: LoginSchema) => {
-    await loginUser.mutateAsync(data, {
-      onSuccess: () => {
-        navigate(location.state?.from || '/activities'); 
-      }
-    });
+  const onSubmit = async (data: RegisterSchema) => {
+    await registerUser.mutateAsync(data);
   };
 
   return (
@@ -50,8 +44,9 @@ export default function LoginForm() {
         color="secondary.main"
       >
         <LockOpen fontSize="large" />
-        <Typography variant="h4">Sig in</Typography>
+        <Typography variant="h4">Register</Typography>
       </Box>
+      <TextInput label="Display Name" control={control} name="displayName" />
       <TextInput label="Email" control={control} name="email" />
       <TextInput
         label="Password"
@@ -65,12 +60,12 @@ export default function LoginForm() {
         disabled={!isValid || isLoading}
         size="large"
       >
-        Login
+        Register
       </Button>
       <Typography sx={{textAlign: 'center'}}>
-        Don't have an account?
-        <Typography sx={{ml: 1}} component={Link} to='/register' color='primary'>
-          Sign up
+        Already have an account?
+        <Typography sx={{ml: 1}} component={Link} to='/login' color='primary'>
+          Sign in
         </Typography>
       </Typography>
     </Paper>
