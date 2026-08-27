@@ -1,7 +1,6 @@
 using Aplication.Activities.Commands;
 using Aplication.Activities.DTOs;
 using Aplication.Activities.Queries;
-using Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -10,13 +9,13 @@ public class ActivitiesController : BaseApiController
 {
 
     [HttpGet]
-    public async Task<ActionResult<List<Activity>>> GetActivities()
+    public async Task<ActionResult<List<ActivityDto>>> GetActivities()
     {
         return await Mediator.Send(new GetActivityList.Query());
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Activity>> GetActivityDetail(string id)
+    public async Task<ActionResult<ActivityDto>> GetActivityDetail(string id)
     {
         //throw new Exception("Server test error");
         return HandleResult(await Mediator.Send(new GetActivityDetails.Query { Id = id }));
