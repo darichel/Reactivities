@@ -17,31 +17,6 @@ export default function ActivityDetailPage() {
   if (isLoadingActivity) return <Typography>Loading...</Typography>;
   if (!activity) return <Typography>Activity not found</Typography>;
   return (
-    // <Card sx={{ borderRadius: 3 }}>
-    //   <CardMedia
-    //     component="img"
-    //     src={`/images/categoryImages/${activity.category}.jpg`}
-    //   />
-    //   <CardContent>
-    //     <Typography variant="h5">{activity.title}</Typography>
-    //     <Typography variant="subtitle1" fontWeight="light">
-    //       {new Date(activity.date).toISOString().split("T")[0]}
-    //     </Typography>
-    //     <Typography variant="body1">{activity.description}</Typography>
-    //   </CardContent>
-    //   <CardActions>
-    //     <Button
-    //       color="primary"
-    //       component={Link}
-    //       to={`/manage/${activity.id}`}
-    //     >
-    //       Edit
-    //     </Button>
-    //     <Button color="inherit" onClick={() => navigate('/activities')}>
-    //       Cancel
-    //     </Button>
-    //   </CardActions>
-    // </Card>
     <Grid container spacing={3}>
       <Grid  size={8}>
         <ActivityDetailHeader activity={activity} />
@@ -49,7 +24,7 @@ export default function ActivityDetailPage() {
         <ActivityDetailChat />
       </Grid>
       <Grid  size={4}>
-        <ActivityDetailSidebar />
+        <ActivityDetailSidebar activity={activity}/>
       </Grid>
     </Grid>
   );

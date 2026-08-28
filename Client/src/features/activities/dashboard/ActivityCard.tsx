@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import { Link } from "react-router";
 import { formatDate } from "../../../lib/util/util";
-import { Activity, Profile } from "../../../lib/types";
 import AvatarPopover from "../../../app/shared/components/AvatarPopover";
 
 type Props = {
