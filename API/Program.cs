@@ -5,11 +5,10 @@ using Aplication.Core;
 using Aplication.Interfaces;
 using Domain;
 using FluentValidation;
-using Infrastructure;
+using Infrastructure.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -43,6 +42,15 @@ builder.Services.AddIdentityApiEndpoints<User>(opt =>
 })
 .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddAuthorization(opt =>
+{
+    opt.AddPolicy("IsActivityHost", policy =>
+    {
+        policy.Requirements.Add(new IsHostRequirement());
+    });
+});
+builder.Services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 
 builder.Services.ConfigureApplicationCookie(opt =>
 {
