@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router";
 import { formatDate } from "../../../lib/util/util";
 import { Activity, Profile } from "../../../lib/types";
+import AvatarPopover from "../../../app/shared/components/AvatarPopover";
 
 type Props = {
   activity: Activity;
@@ -52,7 +53,7 @@ export default function ActivityCard({ activity }: Props) {
           mr={2}
         >
           {(activity.isHost || activity.isGoing) && (
-            <Chip label={label} color={color} sx={{ borderRadius: 2 }} />
+            <Chip variant="outlined" label={label} color={color} sx={{ borderRadius: 2 }} />
           )}
           {activity.isCancelled && (
             <Chip label="Cancelled" color="error" sx={{ borderRadius: 2 }} />
@@ -80,14 +81,7 @@ export default function ActivityCard({ activity }: Props) {
           sx={{ backgroundColor: "grey.200", py: 3, pl: 3 }}
         >
           {activity.attendees.map((att: Profile) => (
-            <Avatar
-              key={att.id}
-              alt={att.displayName + " image"}
-              src={att.imageUrl}
-              component={Link}
-              to={`/profiles/${att.id}`}
-              sx={{ width: 50, height: 50 }}
-            />
+            <AvatarPopover profile={att} />
           ))}
         </Box>
       </CardContent>
